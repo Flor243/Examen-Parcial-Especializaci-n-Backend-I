@@ -1,0 +1,8 @@
+server:
+  port: 8083
+
+info:
+  app:
+    name: movie-service
+    description: Movie Service created for Class 12 Examen Parcial
+    version: 1.0.0

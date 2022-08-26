@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: CountFilter
+      routes:
+        - id: catalogRoute
+          uri: lb://catalog-service
+          predicates:
+            - Path=/catalogs/**
+          filters:
+            - AddRequestHeader=catalog-request-header, testing-headers
+            - AddResponseHeader=catalog-response-header, testing-response-header
+        - id: animalRoute
+          uri: lb://movie-service
+          predicates:
+            - Path=/movies/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+info:
+  app:
+    name: gateway-service
+    description: Gateway Service created for Class 12 Examen Parcial
+    version: 1.0.0
